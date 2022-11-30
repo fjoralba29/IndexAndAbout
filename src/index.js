@@ -10,16 +10,18 @@ app.get('/uniques', async (request, response) => {
     response.send(uniqueValues);
 });
 
-app.get('/sum', async (request, response) => {
+app.get('/sum', async (request, response) => { 
     const content = await fsp.readFile('./data.csv', 'utf8');
     const data = content.split('\r\n');
     const numbers=[]; 
     for (let number of data) {
         numbers.push(Number(number)); 
-    }    
+    } 
+    console.log(numbers);    
     let sum = 0; 
-    for (let i = 0; i < numbers.length, i++;) {
+    for (let i = 0; i < numbers.length; i++) {
         sum = sum + numbers[i];
+        console.log(sum);
     }   
     response.send('The sum is =>' + sum);
 });
