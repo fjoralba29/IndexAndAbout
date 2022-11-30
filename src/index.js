@@ -4,7 +4,7 @@ import express, { response } from 'express';
 
 const app = express();
 
-app.get('/', async (request, responde) => {
+app.get('/', async (request, respond) => {
     const content = await fsp.readFile('./index.html', 'utf8');
     respond.send(content);
 });
