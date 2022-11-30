@@ -1,22 +1,49 @@
 import fsp from 'fs/promises'; 
-import express, { response } from 'express'; 
+import express from 'express'; 
 
 const app = express();
 
-app.get('/', async (request, respond) => {
-    const content = await fsp.readFile('./index.html', 'utf8');
-    respond.send(content);
+app.get('/uniques', async (request, response) => {
+    const content = await fsp.readFile('./data.csv', 'utf8');
+    const data = content.split('\r\n');
+    const uniqueValues = data.filter((value, index, array) => array.indexOf(value) === index);
+    response.send(uniqueValues);
 });
 
-app.get('/about', async (request, respond) => {
-    const content = await fsp.readFile('./about.html', 'utf8');
-    respond.send(content);
+app.get('/sum', async (request, response) => {
+    const content = await fsp.readFile('./data.csv', 'utf8');
+    const data = content.split('\r\n');
+    let sum; 
+    for (let number of data) {
+        sum += (Number(number)); 
+    }    
+    response.send(sum);
 });
 
 const port = 3000; 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`)
 });
+
+
+
+
+// const app = express();
+
+// app.get('/', async (request, respond) => {
+//     const content = await fsp.readFile('./index.html', 'utf8');
+//     respond.send(content);
+// });
+
+// app.get('/about', async (request, respond) => {
+//     const content = await fsp.readFile('./about.html', 'utf8');
+//     respond.send(content);
+// });
+
+// const port = 3000; 
+// app.listen(port, () => {
+//     console.log(`Server running on port ${port}`)
+// });
 
 
 // const server = http.createServer(async (request, respond) => {
