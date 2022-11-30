@@ -9,7 +9,7 @@ app.get('/', async (request, respond) => {
     respond.send(content);
 });
 
-app.get('/about', async (request, response) => {
+app.get('/about', async (request, respond) => {
     const content = await fsp.readFile('./about.html', 'utf8');
     respond.send(content);
 });
