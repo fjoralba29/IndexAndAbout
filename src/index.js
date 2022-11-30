@@ -13,11 +13,15 @@ app.get('/uniques', async (request, response) => {
 app.get('/sum', async (request, response) => {
     const content = await fsp.readFile('./data.csv', 'utf8');
     const data = content.split('\r\n');
-    let sum; 
+    const numbers=[]; 
     for (let number of data) {
-        sum += (Number(number)); 
+        numbers.push(Number(number)); 
     }    
-    response.send(sum);
+    let sum = 0; 
+    for (let i = 0; i < numbers.length, i++;) {
+        sum = sum + numbers[i];
+    }   
+    response.send('The sum is =>' + sum);
 });
 
 const port = 3000; 
